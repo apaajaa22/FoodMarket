@@ -1,3 +1,4 @@
 import Header from './Header';
+import Select from './Select';
 
-export {Header};
+export {Header, Select};
