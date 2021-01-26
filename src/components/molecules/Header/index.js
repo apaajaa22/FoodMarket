@@ -1,18 +1,29 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {IconBack} from '../../../assets';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {IconBack, ILUser} from '../../../assets';
 
-const Header = ({title, subTitle, back, onPress}) => {
+const Header = ({title, subTitle, back, onPress, profile}) => {
   return (
     <View style={styles.wrapper}>
       {back && (
         <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-          <IconBack />
+          <View style={styles.icon}>
+            <IconBack />
+          </View>
         </TouchableOpacity>
       )}
       <View style={styles.wrappertext}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subTitle}>{subTitle}</Text>
+        <View>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subTitle}>{subTitle}</Text>
+        </View>
+        <View>
+          {profile && (
+            <View>
+              <Image source={ILUser} style={styles.image} />
+            </View>
+          )}
+        </View>
       </View>
     </View>
   );
@@ -28,7 +39,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  wrappertext: {flex: 1, marginLeft: 32},
+  icon: {marginRight: 32},
+  wrappertext: {
+    flex: 1,
+    marginLeft: -1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   title: {fontFamily: 'Poppins-Medium', fontSize: 22, color: '#020202'},
   subTitle: {fontFamily: 'Poppins-Light', fontSize: 14, color: '#8D92A3'},
+  image: {width: 50, height: 50},
 });
