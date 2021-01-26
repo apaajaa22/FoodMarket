@@ -1,8 +1,31 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {SignIn, SplashScreen, SignUp, Address, SignUpSuccess} from '../pages';
+import {
+  SignIn,
+  SplashScreen,
+  SignUp,
+  Address,
+  SignUpSuccess,
+  Home,
+  Order,
+  Profile,
+} from '../pages';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {TabBar} from '../components';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const MainApp = () => {
+  return (
+    <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Order" component={Order} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
+};
+
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="SplashScreen">
@@ -29,6 +52,11 @@ const Router = () => {
       <Stack.Screen
         name="SignUpSuccess"
         component={SignUpSuccess}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MainApp"
+        component={MainApp}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
