@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {IconBack, ILUser} from '../../../assets';
+import {IconBack} from '../../../assets';
 
-const Header = ({title, subTitle, back, onPress, profile}) => {
+const Header = ({title, subTitle, back, onPress, profile, img}) => {
   return (
     <View style={styles.wrapper}>
       {back && (
@@ -20,7 +20,7 @@ const Header = ({title, subTitle, back, onPress, profile}) => {
         <View>
           {profile && (
             <View>
-              <Image source={ILUser} style={styles.image} />
+              <Image source={img} style={styles.image} />
             </View>
           )}
         </View>
