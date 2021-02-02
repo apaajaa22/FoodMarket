@@ -9,6 +9,8 @@ import {
   Home,
   Order,
   Profile,
+  FoodDetail,
+  PaymentSummary,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {TabBar} from '../components';
@@ -57,6 +59,16 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="FoodDetail"
+        component={FoodDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="PaymentSummary"
+        component={PaymentSummary}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

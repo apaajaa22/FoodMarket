@@ -1,35 +1,42 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
 
 const SignUp = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <Header
-        title="Sign Up"
-        subTitle="Register and eat"
-        back
-        onPress={() => navigation.goBack()}
-      />
-      <View style={styles.wrapper}>
-        <View style={styles.wrapperborder}>
-          <View style={styles.border}>
-            <View style={styles.borderPhoto}>
-              <Text style={styles.addPhoto}>Add Photo</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Header
+          title="Sign Up"
+          subTitle="Register and eat"
+          back
+          onPress={() => navigation.goBack()}
+        />
+        <View style={styles.wrapper}>
+          <View style={styles.wrapperborder}>
+            <View style={styles.border}>
+              <View style={styles.borderPhoto}>
+                <Text style={styles.addPhoto}>Add Photo</Text>
+              </View>
             </View>
           </View>
+          <TextInput label="Full Name" inputLabel="Type your full name" />
+          <Gap height={16} />
+          <TextInput
+            label="Email Address"
+            inputLabel="Type your email address"
+          />
+          <Gap height={16} />
+          <TextInput label="Password" inputLabel="Type your password" />
+          <Gap height={24} />
         </View>
-        <TextInput label="Full Name" inputLabel="Type your full name" />
-        <Gap height={16} />
-        <TextInput label="Email Address" inputLabel="Type your email address" />
-        <Gap height={16} />
-        <TextInput label="Password" inputLabel="Type your password" />
-        <Gap height={24} />
-        <Button
-          label="Continue"
-          onPress={() => navigation.navigate('Address')}
-        />
-      </View>
+        <View style={styles.button}>
+          <Button
+            label="Continue"
+            onPress={() => navigation.navigate('Address')}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -37,8 +44,8 @@ const SignUp = ({navigation}) => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  page: {flex: 1},
-  wrapper: {marginTop: 20, padding: 24, backgroundColor: 'white', flex: 1},
+  page: {flex: 1, backgroundColor: 'white'},
+  wrapper: {padding: 24, backgroundColor: 'white', flex: 1},
   addPhoto: {
     fontSize: 14,
     fontFamily: 'Poppins-Regular',
@@ -62,5 +69,6 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     padding: 24,
   },
-  wrapperborder: {alignItems: 'center', marginTop: 26, marginBottom: 16},
+  wrapperborder: {alignItems: 'center', marginBottom: 16},
+  button: {paddingHorizontal: 24},
 });

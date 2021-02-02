@@ -6,7 +6,7 @@ import {FoodCard, Gap, Header, HomeTabSection} from '../../components';
 const Home = () => {
   return (
     <View style={styles.page}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Header
           profile
           img={FoodDummy4}
@@ -35,7 +35,7 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  page: {flex: 1},
-  wrapper: {flexDirection: 'row', marginTop: 24},
+  page: {flex: 1, backgroundColor: 'white'},
+  wrapper: {flexDirection: 'row', marginTop: 20},
   tabContainer: {flex: 1},
 });

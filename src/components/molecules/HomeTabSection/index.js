@@ -3,6 +3,7 @@ import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {HomeFoodList} from '..';
 import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
 
 const renderTabBar = (props) => (
   <TabBar
@@ -17,34 +18,109 @@ const renderTabBar = (props) => (
 );
 
 const NewTaste = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList image={FoodDummy4} item="Kopi Kamu" price="20.000" />
-      <HomeFoodList image={FoodDummy2} item="Jeruk Hangat" price="20.000" />
-      <HomeFoodList image={FoodDummy1} item="Caesar Salad" price="20.000" />
-      <HomeFoodList image={FoodDummy3} item="Gule" price="20.000" />
+      <HomeFoodList
+        image={FoodDummy4}
+        item="Kopi Kamu"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy2}
+        item="Jeruk Hangat"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy1}
+        item="Caesar Salad"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy3}
+        item="Gule"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
     </View>
   );
 };
 
 const Popular = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList image={FoodDummy1} item="Caesar Salad" price="20.000" />
-      <HomeFoodList image={FoodDummy3} item="Gule" price="20.000" />
-      <HomeFoodList image={FoodDummy4} item="Kopi Kamu" price="20.000" />
-      <HomeFoodList image={FoodDummy2} item="Jeruk Hangat" price="20.000" />
+      <HomeFoodList
+        image={FoodDummy1}
+        item="Caesar Salad"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy3}
+        item="Gule"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy4}
+        item="Kopi Kamu"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy2}
+        item="Jeruk Hangat"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
     </View>
   );
 };
 
 const Recommended = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList image={FoodDummy3} item="Gule" price="20.000" />
-      <HomeFoodList image={FoodDummy4} item="Kopi Kamu" price="20.000" />
-      <HomeFoodList image={FoodDummy1} item="Caesar Salad" price="20.000" />
-      <HomeFoodList image={FoodDummy2} item="Jeruk Hangat" price="20.000" />
+      <HomeFoodList
+        image={FoodDummy3}
+        item="Gule"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy4}
+        item="Kopi Kamu"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy1}
+        item="Caesar Salad"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
+      <HomeFoodList
+        image={FoodDummy2}
+        item="Jeruk Hangat"
+        price="20.000"
+        onPress={() => navigation.navigate('FoodDetail')}
+        rating
+      />
     </View>
   );
 };
@@ -90,5 +166,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
     color: focused ? '#020202' : '#8D92A3',
   }),
-  wrapperContent: {flex: 1},
+  wrapperContent: {flex: 1, paddingHorizontal: 24},
 });

@@ -5,5 +5,17 @@ import FoodCard from './FoodCard';
 import HomeTabSection from './HomeTabSection';
 import Rating from './Rating';
 import HomeFoodList from './HomeFoodList';
+import Counter from './Counter';
+import DetailOrder from './DetailOrder';
 
-export {Header, Select, TabBar, FoodCard, HomeTabSection, Rating, HomeFoodList};
+export {
+  Header,
+  Select,
+  TabBar,
+  FoodCard,
+  HomeTabSection,
+  Rating,
+  HomeFoodList,
+  Counter,
+  DetailOrder,
+};
