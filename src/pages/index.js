@@ -8,6 +8,7 @@ import Order from './Order';
 import Profile from './Profile';
 import FoodDetail from './FoodDetail';
 import PaymentSummary from './PaymentSummary';
+import OrderSuccess from './OrderSuccess';
 
 export {
   SplashScreen,
@@ -20,4 +21,5 @@ export {
   Profile,
   FoodDetail,
   PaymentSummary,
+  OrderSuccess,
 };

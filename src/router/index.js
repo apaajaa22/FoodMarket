@@ -11,6 +11,7 @@ import {
   Profile,
   FoodDetail,
   PaymentSummary,
+  OrderSuccess,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {TabBar} from '../components';
@@ -69,6 +70,11 @@ const Router = () => {
       <Stack.Screen
         name="PaymentSummary"
         component={PaymentSummary}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="OrderSuccess"
+        component={OrderSuccess}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -49,7 +49,10 @@ const PaymentSummary = ({navigation}) => {
             </View>
           </View>
           <View style={styles.button}>
-            <Button label="Checkout Now" />
+            <Button
+              label="Checkout Now"
+              onPress={() => navigation.replace('OrderSuccess')}
+            />
           </View>
         </View>
       </ScrollView>

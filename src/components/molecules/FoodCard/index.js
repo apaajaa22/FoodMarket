@@ -1,16 +1,21 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Rating} from '..';
 
 const FoodCard = ({image}) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.page}>
+    <TouchableOpacity
+      style={styles.page}
+      activeOpacity={0.8}
+      onPress={() => navigation.navigate('FoodDetail')}>
       <Image source={image} style={styles.image} />
       <View style={styles.container}>
         <Text style={styles.title}>Cherry Healthy</Text>
         <Rating />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
