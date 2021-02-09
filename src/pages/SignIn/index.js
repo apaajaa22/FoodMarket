@@ -11,10 +11,15 @@ const SignIn = ({navigation}) => {
         <Gap height={16} />
         <TextInput label="Password" inputLabel="Type your password here" />
         <Gap height={24} />
-        <Button label="Sign In" />
+        <Button
+          label="Sign In"
+          colorButton="#FFC700"
+          textColorButton="#020202"
+        />
         <Gap height={12} />
         <Button
-          subButton
+          colorButton="#8D92A3"
+          textColorButton="white"
           label="Create New Account"
           onPress={() => navigation.navigate('SignUp')}
         />

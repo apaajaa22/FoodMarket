@@ -17,6 +17,8 @@ const SignUpSuccess = ({navigation}) => {
         <Button
           label="Find Foods"
           onPress={() => navigation.replace('MainApp')}
+          colorButton="#FFC700"
+          textColorButton="#020202"
         />
       </View>
     </View>

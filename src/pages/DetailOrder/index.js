@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {FoodDummy2} from '../../assets';
 import {Button, DetailOrder, Gap, Header, HomeFoodList} from '../../components';
 
-const PaymentSummary = ({navigation}) => {
+const detailOrder = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -49,21 +49,29 @@ const PaymentSummary = ({navigation}) => {
               <DetailOrder label="City" value="Bandung" />
             </View>
           </View>
+          <View style={styles.content}>
+            <View style={styles.wrapper}>
+              <Text style={styles.textTitle}>Order Status</Text>
+              <Gap height={8} />
+              <DetailOrder label="#FM209391" value="Paid" price />
+            </View>
+          </View>
           <View style={styles.button}>
             <Button
-              label="Checkout Now"
+              label="Cancel My Order"
               onPress={() => navigation.replace('OrderSuccess')}
-              colorButton="#FFC700"
-              textColorButton="#020202"
+              colorButton="#D9435E"
+              textColorButton="white"
             />
           </View>
         </View>
+        <Gap height={24} />
       </ScrollView>
     </View>
   );
 };
 
-export default PaymentSummary;
+export default detailOrder;
 
 const styles = StyleSheet.create({
   page: {flex: 1},

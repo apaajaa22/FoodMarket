@@ -26,6 +26,8 @@ const Address = ({navigation}) => {
           <Button
             label="Sign Up Now"
             onPress={() => navigation.replace('SignUpSuccess')}
+            colorButton="#FFC700"
+            textColorButton="#020202"
           />
         </View>
       </ScrollView>

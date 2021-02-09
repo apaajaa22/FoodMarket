@@ -17,12 +17,15 @@ const OrderSuccess = ({navigation}) => {
         <Button
           label="Order Other Foods"
           onPress={() => navigation.replace('MainApp')}
+          colorButton="#FFC700"
+          textColorButton="#020202"
         />
       </View>
       <Gap height={12} />
       <View style={styles.button}>
         <Button
-          subButton
+          colorButton="#8D92A3"
+          textColorButton="white"
           label="View My Order"
           onPress={() => navigation.replace('MainApp', {screen: 'Order'})}
         />

@@ -49,6 +49,8 @@ const FoodDetail = ({navigation}) => {
           <Button
             label="Order Now"
             onPress={() => navigation.navigate('PaymentSummary')}
+            colorButton="#FFC700"
+            textColorButton="#020202"
           />
         </View>
       </View>

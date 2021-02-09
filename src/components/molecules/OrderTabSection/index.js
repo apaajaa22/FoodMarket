@@ -1,9 +1,9 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {HomeFoodList} from '..';
 import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
-import {useNavigation} from '@react-navigation/native';
 
 const renderTabBar = (props) => (
   <TabBar
@@ -25,29 +25,35 @@ const InProgress = () => {
         image={FoodDummy4}
         item="Kopi Kamu"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        orderItems={1}
+        activeOpacity={0.8}
+        type="in-progress"
+        onPress={() => navigation.navigate('DetailOrder')}
       />
       <HomeFoodList
         image={FoodDummy2}
         item="Jeruk Hangat"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        orderItems={1}
+        type="in-progress"
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate('DetailOrder')}
       />
       <HomeFoodList
         image={FoodDummy1}
         item="Caesar Salad"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        orderItems={1}
+        type="in-progress"
+        activeOpacity={0.8}
       />
       <HomeFoodList
         image={FoodDummy3}
         item="Gule"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        orderItems={1}
+        type="in-progress"
+        activeOpacity={0.8}
       />
     </View>
   );
@@ -61,29 +67,39 @@ const PostOrders = () => {
         image={FoodDummy1}
         item="Caesar Salad"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        type="past-order"
+        orderItems={1}
+        date="Jun 12, 14:00"
+        statusOrder="Cancelled"
+        activeOpacity={1}
       />
       <HomeFoodList
         image={FoodDummy3}
         item="Gule"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        type="past-order"
+        date="Jun 12, 14:00"
+        orderItems={1}
+        activeOpacity={1}
       />
       <HomeFoodList
         image={FoodDummy4}
         item="Kopi Kamu"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        type="past-order"
+        date="Jun 12, 14:00"
+        orderItems={1}
+        activeOpacity={1}
       />
       <HomeFoodList
         image={FoodDummy2}
         item="Jeruk Hangat"
         price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
+        type="past-order"
+        date="Jun 12, 14:00"
+        statusOrder="Cancelled"
+        orderItems={1}
+        activeOpacity={1}
       />
     </View>
   );

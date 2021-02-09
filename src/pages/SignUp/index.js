@@ -34,6 +34,8 @@ const SignUp = ({navigation}) => {
           <Button
             label="Continue"
             onPress={() => navigation.navigate('Address')}
+            colorButton="#FFC700"
+            textColorButton="#020202"
           />
         </View>
       </ScrollView>
