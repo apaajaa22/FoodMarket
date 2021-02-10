@@ -2,12 +2,16 @@ import React from 'react';
 import {StyleSheet, Text, TextInput as TextInputRn, View} from 'react-native';
 import {Gap} from '..';
 
-const TextInput = ({label, inputLabel}) => {
+const TextInput = ({label, inputLabel, ...restProps}) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
       <Gap height={6} />
-      <TextInputRn placeholder={inputLabel} style={styles.input} />
+      <TextInputRn
+        placeholder={inputLabel}
+        style={styles.input}
+        {...restProps}
+      />
     </View>
   );
 };

@@ -9,6 +9,8 @@ import Counter from './Counter';
 import DetailOrder from './DetailOrder';
 import EmptyOrder from './EmptyOrder';
 import OrderTabSection from './OrderTabSection';
+import ProfileTabSection from './ProfileTabSection';
+import ProfileListMenu from './ProfileListMenu';
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   DetailOrder,
   EmptyOrder,
   OrderTabSection,
+  ProfileTabSection,
+  ProfileListMenu,
 };
