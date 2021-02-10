@@ -1,8 +1,11 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
+import {useSelector} from 'react-redux';
 
 const SignUp = ({navigation}) => {
+  const globalState = useSelector((state) => state.globalReducer);
+  console.log('global: ', globalState);
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
