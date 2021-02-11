@@ -4,15 +4,21 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Gap} from '../../atoms';
 
-const Select = () => {
+const Select = ({value, onSelectChange}) => {
   return (
     <View>
       <Text style={styles.label}>City</Text>
       <Gap height={6} />
       <View style={styles.input}>
-        <Picker style={styles.label}>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
+        <Picker
+          style={styles.label}
+          selectedValue={value}
+          onValueChange={(itemValue) => onSelectChange(itemValue)}>
+          <Picker.Item label="Bandung" value="Bandung" />
+          <Picker.Item label="Jakarta" value="Jakarta" />
+          <Picker.Item label="Surabaya" value="Surabaya" />
+          <Picker.Item label="Semarang" value="Semarang" />
+          <Picker.Item label="Jogjakarta" value="Jogjakarta" />
         </Picker>
       </View>
     </View>

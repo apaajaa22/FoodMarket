@@ -1,14 +1,27 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {useForm} from '../../utils';
 
 const SignUp = ({navigation}) => {
-  const globalState = useSelector((state) => state.globalReducer);
-  console.log('global: ', globalState);
+  const [form, setForm] = useForm({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    console.log('form: ', form);
+    dispatch({type: 'SET_REGISTER', value: form});
+    navigation.navigate('Address');
+  };
   return (
-    <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      showsVerticalScrollIndicator={false}>
+      <View style={styles.page}>
         <Header
           title="Sign Up"
           subTitle="Register and eat"
@@ -23,26 +36,39 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
           </View>
-          <TextInput label="Full Name" inputLabel="Type your full name" />
+          <TextInput
+            label="Full Name"
+            inputLabel="Type your full name"
+            value={form.name}
+            onChangeText={(value) => setForm('name', value)}
+          />
           <Gap height={16} />
           <TextInput
             label="Email Address"
             inputLabel="Type your email address"
+            value={form.email}
+            onChangeText={(value) => setForm('email', value)}
           />
           <Gap height={16} />
-          <TextInput label="Password" inputLabel="Type your password" />
-          <Gap height={24} />
-        </View>
-        <View style={styles.button}>
-          <Button
-            label="Continue"
-            onPress={() => navigation.navigate('Address')}
-            colorButton="#FFC700"
-            textColorButton="#020202"
+          <TextInput
+            label="Password"
+            inputLabel="Type your password"
+            value={form.password}
+            onChangeText={(value) => setForm('password', value)}
+            secureTextEntry
           />
+          <Gap height={24} />
+          <View style={styles.button}>
+            <Button
+              label="Continue"
+              onPress={onSubmit}
+              colorButton="#FFC700"
+              textColorButton="#020202"
+            />
+          </View>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -75,5 +101,4 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   wrapperborder: {alignItems: 'center', marginBottom: 16},
-  button: {paddingHorizontal: 24},
 });
