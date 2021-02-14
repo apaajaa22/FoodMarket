@@ -1,8 +1,16 @@
-import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import ImagePicker from 'react-native-image-picker';
+import {useDispatch} from 'react-redux';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {useSelector, useDispatch} from 'react-redux';
-import {useForm} from '../../utils';
+import {showMessage, useForm} from '../../utils';
 
 const SignUp = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -10,6 +18,9 @@ const SignUp = ({navigation}) => {
     email: '',
     password: '',
   });
+
+  const [photo, setPhoto] = useState('');
+
   const dispatch = useDispatch();
 
   const onSubmit = () => {
@@ -17,6 +28,32 @@ const SignUp = ({navigation}) => {
     dispatch({type: 'SET_REGISTER', value: form});
     navigation.navigate('Address');
   };
+
+  const addPhoto = () => {
+    ImagePicker.launchImageLibrary(
+      {quality: 0.5, maxWidth: 200, maxHeight: 200},
+      (response) => {
+        // Same code as in above section!
+        console.log('Response = ', response);
+
+        if (response.didCancel || response.error) {
+          console.log('User cancelled image picker');
+          showMessage('Anda tidak memilih foto');
+        } else {
+          const source = {uri: response.uri};
+          const dataImage = {
+            uri: response.uri,
+            type: response.type,
+            name: response.fileName,
+          };
+          setPhoto(source);
+          // You can also display the image using data:
+          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        }
+      },
+    );
+  };
+
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -30,11 +67,17 @@ const SignUp = ({navigation}) => {
         />
         <View style={styles.wrapper}>
           <View style={styles.wrapperborder}>
-            <View style={styles.border}>
-              <View style={styles.borderPhoto}>
-                <Text style={styles.addPhoto}>Add Photo</Text>
+            <TouchableOpacity activeOpacity={0.7} onPress={addPhoto}>
+              <View style={styles.border}>
+                {photo ? (
+                  <Image source={photo} style={styles.borderPhoto} />
+                ) : (
+                  <View style={styles.borderPhoto}>
+                    <Text style={styles.addPhoto}>Add Photo</Text>
+                  </View>
+                )}
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
           <TextInput
             label="Full Name"
