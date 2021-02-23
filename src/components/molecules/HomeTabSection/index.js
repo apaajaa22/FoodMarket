@@ -1,9 +1,10 @@
-import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {useDispatch, useSelector} from 'react-redux';
 import {HomeFoodList} from '..';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
-import {useNavigation} from '@react-navigation/native';
+import {getFoodDataByTypes} from '../../../redux/action/home';
 
 const renderTabBar = (props) => (
   <TabBar
@@ -19,108 +20,78 @@ const renderTabBar = (props) => (
 
 const NewTaste = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {newTaste} = useSelector((state) => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('new_food'));
+  }, [dispatch]);
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList
-        image={FoodDummy4}
-        item="Kopi Kamu"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy2}
-        item="Jeruk Hangat"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy1}
-        item="Caesar Salad"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy3}
-        item="Gule"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
+      {newTaste.map((item) => {
+        return (
+          <HomeFoodList
+            key={item.id}
+            type="product"
+            image={{uri: item.picturePath}}
+            item={item.name}
+            price={item.price}
+            onPress={() => navigation.navigate('FoodDetail', item)}
+            rating={item.rate}
+          />
+        );
+      })}
     </View>
   );
 };
 
 const Popular = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {popular} = useSelector((state) => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('popular'));
+  }, [dispatch]);
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList
-        image={FoodDummy1}
-        item="Caesar Salad"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy3}
-        item="Gule"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy4}
-        item="Kopi Kamu"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy2}
-        item="Jeruk Hangat"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
+      {popular.map((item) => {
+        return (
+          <HomeFoodList
+            key={item.id}
+            type="product"
+            image={{uri: item.picturePath}}
+            item={item.name}
+            price={item.price}
+            onPress={() => navigation.navigate('FoodDetail', item)}
+            rating={item.rate}
+          />
+        );
+      })}
     </View>
   );
 };
 
 const Recommended = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {recommended} = useSelector((state) => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('recommended'));
+  }, [dispatch]);
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList
-        image={FoodDummy3}
-        item="Gule"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy4}
-        item="Kopi Kamu"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy1}
-        item="Caesar Salad"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
-      <HomeFoodList
-        image={FoodDummy2}
-        item="Jeruk Hangat"
-        price="20.000"
-        onPress={() => navigation.navigate('FoodDetail')}
-        rating
-      />
+      {recommended.map((item) => {
+        return (
+          <HomeFoodList
+            key={item.id}
+            type="product"
+            image={{uri: item.picturePath}}
+            item={item.name}
+            price={item.price}
+            onPress={() => navigation.navigate('FoodDetail', item)}
+            rating={item.rate}
+          />
+        );
+      })}
     </View>
   );
 };

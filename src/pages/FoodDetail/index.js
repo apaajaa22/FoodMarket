@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -6,14 +6,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {FoodDummy5, IconBackWhite} from '../../assets';
+import {IconBackWhite} from '../../assets';
 import {Button, Gap} from '../../components/atoms';
-import {Counter, Rating} from '../../components/molecules';
+import {Counter, Number, Rating} from '../../components/molecules';
 
-const FoodDetail = ({navigation}) => {
+const FoodDetail = ({navigation, route}) => {
+  const {
+    name,
+    picturePath,
+    description,
+    ingredients,
+    rate,
+    price,
+  } = route.params;
+  const [totalItem, setTotalItem] = useState(1);
+  const onCounterChange = (value) => {
+    console.log('value counter: ', value);
+    setTotalItem(value);
+  };
   return (
     <View style={styles.page}>
-      <ImageBackground source={FoodDummy5} style={styles.background}>
+      <ImageBackground source={{uri: picturePath}} style={styles.background}>
         <TouchableOpacity
           style={styles.iconBack}
           onPress={() => navigation.goBack()}>
@@ -23,27 +36,24 @@ const FoodDetail = ({navigation}) => {
       <View style={styles.content}>
         <View style={styles.counterSection}>
           <View>
-            <Text style={styles.title}>Cherry Healthy</Text>
-            <Rating />
+            <Text style={styles.title}>{name}</Text>
+            <Rating number={rate} />
           </View>
           <View>
-            <Counter />
+            <Counter onValueChange={onCounterChange} />
           </View>
         </View>
-        <Text style={styles.desc}>
-          Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan
-          pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan
-          teratur.
-        </Text>
+        <Text style={styles.desc}>{description}</Text>
         <Gap height={16} />
         <Text style={styles.subTitle}>Ingredients:</Text>
         <Gap height={4} />
-        <Text style={styles.desc}>Seledri, telur, blueberry, madu.</Text>
+        <Text style={styles.desc}>{ingredients}</Text>
       </View>
       <View style={styles.footer}>
         <View style={styles.footerContainer}>
-          <Text>Total Price:</Text>
-          <Text>IDR 12.289.000</Text>
+          <Text style={styles.totalPrice}>Total Price:</Text>
+          <Number number={totalItem * price} style={styles.priceTotal} />
+          {/* <Text>IDR {totalItem * price}</Text> */}
         </View>
         <View style={styles.button}>
           <Button
@@ -95,6 +105,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 18,
   },
+  totalPrice: {fontFamily: 'Poppins-Regular', fontSize: 14, color: '#8D92A3'},
+  priceTotal: {fontFamily: 'Poppins-Regular', fontSize: 20},
   footerContainer: {flex: 1},
   button: {width: 163, height: 45},
 });

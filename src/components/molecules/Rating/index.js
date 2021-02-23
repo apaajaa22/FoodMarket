@@ -1,18 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {Number} from '..';
 import {IconStarOff, IconStarOn} from '../../../assets';
 import {Gap} from '../../atoms';
 
-const Rating = () => {
+const Rating = ({number}) => {
+  const renderStar = () => {
+    let star = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= number) {
+        star.push(<IconStarOn key={i} />);
+      } else {
+        star.push(<IconStarOff key={i} />);
+      }
+    }
+    return star;
+  };
   return (
     <View style={styles.wrapperStar}>
-      <IconStarOn />
-      <IconStarOn />
-      <IconStarOn />
-      <IconStarOn />
-      <IconStarOff />
+      {renderStar()}
       <Gap width={4} />
-      <Text style={styles.text}>4.5</Text>
+      <Number number={number} type="decimal" style={styles.text} />
+      {/* <Text style={styles.text}>{number}</Text> */}
     </View>
   );
 };
