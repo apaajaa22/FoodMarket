@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {IconForward} from '../../../assets';
 
-const ProfileListMenu = ({label}) => {
+const ProfileListMenu = ({label, onPress}) => {
   return (
-    <TouchableOpacity style={styles.page} activeOpacity={0.7}>
+    <TouchableOpacity style={styles.page} activeOpacity={0.7} onPress={onPress}>
       <Text style={styles.label}>{label}</Text>
       <IconForward />
     </TouchableOpacity>

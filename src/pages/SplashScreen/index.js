@@ -2,13 +2,22 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Logo} from '../../assets';
 import {Gap} from '../../components';
+import {getData} from '../../utils';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('SignIn');
+      getData('token').then((response) => {
+        console.log('token: ', response);
+        if (response) {
+          navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+        } else {
+          navigation.replace('SignIn');
+        }
+      });
     }, 2000);
   }, [navigation]);
+
   return (
     <View style={styles.screen}>
       <Logo />

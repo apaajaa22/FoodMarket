@@ -7,12 +7,7 @@ const Home = () => {
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header
-          profile
-          img={FoodDummy4}
-          title="FoodMarket"
-          subTitle="Let's get some foods"
-        />
+        <Header profile title="FoodMarket" subTitle="Let's get some foods" />
         <View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.wrapper}>
