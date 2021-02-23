@@ -49,6 +49,8 @@ const SignUp = ({navigation}) => {
           setPhoto(source);
           // You can also display the image using data:
           // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          dispatch({type: 'SET_PHOTO', value: dataImage});
+          dispatch({type: 'SET_UPLOAD_STATUS', value: true});
         }
       },
     );

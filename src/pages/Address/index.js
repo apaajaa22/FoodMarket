@@ -1,10 +1,10 @@
 import Axios from 'axios';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {showMessage} from 'react-native-flash-message';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Gap, Header, Select, TextInput} from '../../components';
-import {useForm} from '../../utils';
+import {setLoading, signUpAction} from '../../redux/action';
+import {useForm, showMessage} from '../../utils';
 
 const Address = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -14,30 +14,15 @@ const Address = ({navigation}) => {
     city: 'Bandung',
   });
 
-  const registerReducer = useSelector((state) => state.registerReducer);
+  const {registerReducer, photoReducer} = useSelector((state) => state);
   const dispatch = useDispatch();
   const onSubmit = () => {
     const data = {
       ...form,
       ...registerReducer,
     };
-    dispatch({type: 'SET_LOADING', value: true});
-    Axios.post('http://foodmarket-backend.buildwithangga.id/api/register', data)
-      .then((res) => {
-        dispatch({type: 'SET_LOADING', value: false});
-        showMessage('Register Success', 'success');
-        navigation.replace('SignUpSuccess');
-      })
-      .catch((err) => {
-        dispatch({type: 'SET_LOADING', value: false});
-        showToast(err?.response?.data?.message);
-      });
-  };
-  const showToast = (message, type) => {
-    showMessage({
-      message,
-      type: type === 'success' ? 'success' : 'danger',
-    });
+    dispatch(setLoading(true));
+    dispatch(signUpAction(data, photoReducer, navigation));
   };
   return (
     <ScrollView
