@@ -1,11 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {Number} from '..';
 
-const DetailOrder = ({label, value, price}) => {
+const DetailOrder = ({label, value, price, type}) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
-      <Text style={styles.value(price)}>{value}</Text>
+      {type === 'currency' ? (
+        <Number number={value} style={styles.value(price)} />
+      ) : (
+        <Text style={styles.value(price)}>{value}</Text>
+      )}
     </View>
   );
 };

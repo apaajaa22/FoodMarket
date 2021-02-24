@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -9,9 +9,11 @@ import {
 import {IconBackWhite} from '../../assets';
 import {Button, Gap} from '../../components/atoms';
 import {Counter, Number, Rating} from '../../components/molecules';
+import {getData} from '../../utils';
 
 const FoodDetail = ({navigation, route}) => {
   const {
+    id,
     name,
     picturePath,
     description,
@@ -20,9 +22,44 @@ const FoodDetail = ({navigation, route}) => {
     price,
   } = route.params;
   const [totalItem, setTotalItem] = useState(1);
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    getData('userProfile').then((res) => {
+      setUserProfile(res);
+    });
+  }, []);
+
   const onCounterChange = (value) => {
     console.log('value counter: ', value);
     setTotalItem(value);
+  };
+
+  const onOrder = () => {
+    const totalPrice = totalItem * price;
+    const driver = 50000;
+    const tax = (10 / 100) * (totalItem * price);
+    const total = totalPrice + driver + tax;
+
+    const data = {
+      item: {
+        id,
+        name,
+        price,
+        picturePath,
+      },
+      transaction: {
+        totalItem,
+        totalPrice,
+        driver,
+        tax,
+        total,
+      },
+      userProfile,
+    };
+
+    console.log('data CO:', data);
+    navigation.navigate('PaymentSummary', data);
   };
   return (
     <View style={styles.page}>
@@ -58,7 +95,7 @@ const FoodDetail = ({navigation, route}) => {
         <View style={styles.button}>
           <Button
             label="Order Now"
-            onPress={() => navigation.navigate('PaymentSummary')}
+            onPress={onOrder}
             colorButton="#FFC700"
             textColorButton="#020202"
           />
