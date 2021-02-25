@@ -15,16 +15,8 @@ import {WebView} from 'react-native-webview';
 
 const PaymentSummary = ({navigation, route}) => {
   const {item, transaction, userProfile} = route.params;
-  const [token, setToken] = useState('');
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [paymentURL, setPaymentURL] = useState('https://google.com');
-
-  useEffect(() => {
-    getData('token').then((res) => {
-      console.log('res token: ', res);
-      setToken(res.value);
-    });
-  }, []);
 
   const onCheckOut = () => {
     const data = {
@@ -34,20 +26,22 @@ const PaymentSummary = ({navigation, route}) => {
       total: transaction.total,
       status: 'PENDING',
     };
-    axios
-      .post(`${API_HOST.url}/checkout`, data, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        console.log('response: ', response.data);
-        setIsPaymentOpen(true);
-        setPaymentURL(response.data.data.payment_url);
-      })
-      .catch((err) => {
-        console.log('error: ', err);
-      });
+    getData('token').then((resToken) => {
+      axios
+        .post(`${API_HOST.url}/checkout`, data, {
+          headers: {
+            Authorization: resToken.value,
+          },
+        })
+        .then((response) => {
+          console.log('response: ', response.data);
+          setIsPaymentOpen(true);
+          setPaymentURL(response.data.data.payment_url);
+        })
+        .catch((err) => {
+          console.log('error: ', err);
+        });
+    });
   };
   const onNavChange = (state) => {
     console.log('nav', state);
@@ -55,7 +49,7 @@ const PaymentSummary = ({navigation, route}) => {
       'http://foodmarket-backend.buildwithangga.id/midtrans/success?order_id=2268&status_code=201&transaction_status=pending';
     const titleWeb = 'Laravel';
     if (state.title === titleWeb) {
-      navigation.replace('OrderSuccess');
+      navigation.reset({index: 0, routes: [{name: 'OrderSuccess'}]});
     }
   };
   if (isPaymentOpen) {

@@ -1,9 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {useDispatch, useSelector} from 'react-redux';
 import {HomeFoodList} from '..';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
+import {FoodDummy1, FoodDummy2} from '../../../assets';
+import {getInProgress, getPastOrders} from '../../../redux/action';
 
 const renderTabBar = (props) => (
   <TabBar
@@ -19,88 +21,55 @@ const renderTabBar = (props) => (
 
 const InProgress = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {inProgress} = useSelector((state) => state.orderReducer);
+  useEffect(() => {
+    dispatch(getInProgress());
+  }, []);
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList
-        image={FoodDummy4}
-        item="Kopi Kamu"
-        price="20.000"
-        orderItems={1}
-        activeOpacity={0.8}
-        type="in-progress"
-        onPress={() => navigation.navigate('DetailOrder')}
-      />
-      <HomeFoodList
-        image={FoodDummy2}
-        item="Jeruk Hangat"
-        price="20.000"
-        orderItems={1}
-        type="in-progress"
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('DetailOrder')}
-      />
-      <HomeFoodList
-        image={FoodDummy1}
-        item="Caesar Salad"
-        price="20.000"
-        orderItems={1}
-        type="in-progress"
-        activeOpacity={0.8}
-      />
-      <HomeFoodList
-        image={FoodDummy3}
-        item="Gule"
-        price="20.000"
-        orderItems={1}
-        type="in-progress"
-        activeOpacity={0.8}
-      />
+      {inProgress.map((order) => {
+        return (
+          <HomeFoodList
+            key={order.id}
+            image={{uri: order.food.picturePath}}
+            item={order.food.name}
+            price={order.total}
+            orderItems={order.quantity}
+            activeOpacity={0.8}
+            type="in-progress"
+            onPress={() => navigation.navigate('DetailOrder')}
+          />
+        );
+      })}
     </View>
   );
 };
 
 const PostOrders = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {pastOrders} = useSelector((state) => state.orderReducer);
+  useEffect(() => {
+    dispatch(getPastOrders());
+  }, []);
   return (
     <View style={styles.wrapperContent}>
-      <HomeFoodList
-        image={FoodDummy1}
-        item="Caesar Salad"
-        price="20.000"
-        type="past-order"
-        orderItems={1}
-        date="Jun 12, 14:00"
-        statusOrder="Cancelled"
-        activeOpacity={1}
-      />
-      <HomeFoodList
-        image={FoodDummy3}
-        item="Gule"
-        price="20.000"
-        type="past-order"
-        date="Jun 12, 14:00"
-        orderItems={1}
-        activeOpacity={1}
-      />
-      <HomeFoodList
-        image={FoodDummy4}
-        item="Kopi Kamu"
-        price="20.000"
-        type="past-order"
-        date="Jun 12, 14:00"
-        orderItems={1}
-        activeOpacity={1}
-      />
-      <HomeFoodList
-        image={FoodDummy2}
-        item="Jeruk Hangat"
-        price="20.000"
-        type="past-order"
-        date="Jun 12, 14:00"
-        statusOrder="Cancelled"
-        orderItems={1}
-        activeOpacity={1}
-      />
+      {pastOrders.map((pastOrder) => {
+        return (
+          <HomeFoodList
+            type="past-order"
+            key={pastOrder.id}
+            image={{uri: pastOrder.food.picturePath}}
+            item={pastOrder.food.name}
+            price={pastOrder.total}
+            orderItems={pastOrder.quantity}
+            date={pastOrder.created_at}
+            statusOrder={pastOrder.status}
+            activeOpacity={1}
+          />
+        );
+      })}
     </View>
   );
 };

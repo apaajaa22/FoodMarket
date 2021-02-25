@@ -9,7 +9,7 @@ const Home = ({navigation}) => {
   const {food} = useSelector((state) => state.homeReducer);
   useEffect(() => {
     dispatch(getFoodData());
-  }, [dispatch]);
+  }, []);
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>

@@ -14,6 +14,7 @@ const HomeFoodList = ({
   type,
   date,
   statusOrder,
+  status,
 }) => {
   const renderContent = () => {
     switch (type) {
@@ -48,26 +49,29 @@ const HomeFoodList = ({
             <View style={styles.content}>
               <View style={styles.wrapper}>
                 <Text style={styles.title}>{item}</Text>
-                <Text style={styles.subTitle}>
-                  {orderItems} Items • IDR {price}
-                </Text>
+                <View style={styles.row}>
+                  <Text style={styles.subTitle}>{orderItems} Items • </Text>
+                  <Number number={price} style={styles.subTitle} />
+                </View>
               </View>
             </View>
           </>
         );
       case 'past-order':
+        const formatedDate = new Date(date).toDateString();
         return (
           <>
             <View style={styles.content}>
               <View style={styles.wrapper}>
                 <Text style={styles.title}>{item}</Text>
-                <Text style={styles.subTitle}>
-                  {orderItems} Items • IDR {price}
-                </Text>
+                <View style={styles.row}>
+                  <Text style={styles.subTitle}>{orderItems} Items • </Text>
+                  <Number number={price} style={styles.subTitle} />
+                </View>
               </View>
               <View style={styles.status}>
-                <Text style={styles.date}>{date}</Text>
-                <Text style={styles.statusOrder}>{statusOrder}</Text>
+                <Text style={styles.date}>{formatedDate}</Text>
+                <Text style={styles.statusOrder(status)}>{statusOrder}</Text>
               </View>
             </View>
           </>
@@ -122,5 +126,10 @@ const styles = StyleSheet.create({
   textSummary: {fontFamily: 'Poppins-Regular', fontSize: 13, color: '#8D92A3'},
   status: {alignItems: 'center'},
   date: {color: '#8D92A3', fontSize: 10, fontFamily: 'Poppins-Regular'},
-  statusOrder: {color: '#D9435E', fontSize: 10, fontFamily: 'Poppins-Regular'},
+  statusOrder: (status) => ({
+    color: status === 'CANCELLED' ? '#D9435E' : '#1ABC9C',
+    fontSize: 10,
+    fontFamily: 'Poppins-Regular',
+  }),
+  row: {flexDirection: 'row', alignItems: 'center'},
 });

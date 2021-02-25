@@ -7,7 +7,7 @@ const Counter = ({onValueChange}) => {
 
   useEffect(() => {
     onValueChange(value);
-  });
+  }, []);
 
   const onCount = (type) => {
     let result = value;

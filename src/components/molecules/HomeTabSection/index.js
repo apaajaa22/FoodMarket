@@ -24,7 +24,7 @@ const NewTaste = () => {
   const {newTaste} = useSelector((state) => state.homeReducer);
   useEffect(() => {
     dispatch(getFoodDataByTypes('new_food'));
-  }, [dispatch]);
+  }, []);
   return (
     <View style={styles.wrapperContent}>
       {newTaste.map((item) => {
@@ -50,7 +50,7 @@ const Popular = () => {
   const {popular} = useSelector((state) => state.homeReducer);
   useEffect(() => {
     dispatch(getFoodDataByTypes('popular'));
-  }, [dispatch]);
+  }, []);
   return (
     <View style={styles.wrapperContent}>
       {popular.map((item) => {
@@ -76,7 +76,7 @@ const Recommended = () => {
   const {recommended} = useSelector((state) => state.homeReducer);
   useEffect(() => {
     dispatch(getFoodDataByTypes('recommended'));
-  }, [dispatch]);
+  }, []);
   return (
     <View style={styles.wrapperContent}>
       {recommended.map((item) => {
