@@ -1,10 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
-import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {HomeFoodList} from '..';
-import {FoodDummy1, FoodDummy2} from '../../../assets';
 import {getInProgress, getPastOrders} from '../../../redux/action';
 
 const renderTabBar = (props) => (
@@ -38,7 +37,7 @@ const InProgress = () => {
             orderItems={order.quantity}
             activeOpacity={0.8}
             type="in-progress"
-            onPress={() => navigation.navigate('DetailOrder')}
+            onPress={() => navigation.navigate('DetailOrder', order)}
           />
         );
       })}
@@ -46,7 +45,7 @@ const InProgress = () => {
   );
 };
 
-const PostOrders = () => {
+const PastOrders = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {pastOrders} = useSelector((state) => state.orderReducer);
@@ -67,6 +66,10 @@ const PostOrders = () => {
             date={pastOrder.created_at}
             statusOrder={pastOrder.status}
             activeOpacity={1}
+            onPress={() => navigation.navigate('DetailOrder', pastOrder)}
+            statusColor={
+              pastOrder.status === 'CANCELLED' ? '#D9435E' : '#1ABC9C'
+            }
           />
         );
       })}
@@ -80,12 +83,12 @@ const OrderTabSection = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: '1', title: 'In Progress'},
-    {key: '2', title: 'Post Orders'},
+    {key: '2', title: 'Past Orders'},
   ]);
 
   const renderScene = SceneMap({
     1: InProgress,
-    2: PostOrders,
+    2: PastOrders,
   });
   return (
     <TabView

@@ -14,7 +14,7 @@ const HomeFoodList = ({
   type,
   date,
   statusOrder,
-  status,
+  statusColor,
 }) => {
   const renderContent = () => {
     switch (type) {
@@ -71,7 +71,9 @@ const HomeFoodList = ({
               </View>
               <View style={styles.status}>
                 <Text style={styles.date}>{formatedDate}</Text>
-                <Text style={styles.statusOrder(status)}>{statusOrder}</Text>
+                <Text style={styles.statusOrder(statusColor)}>
+                  {statusOrder}
+                </Text>
               </View>
             </View>
           </>
@@ -126,8 +128,8 @@ const styles = StyleSheet.create({
   textSummary: {fontFamily: 'Poppins-Regular', fontSize: 13, color: '#8D92A3'},
   status: {alignItems: 'center'},
   date: {color: '#8D92A3', fontSize: 10, fontFamily: 'Poppins-Regular'},
-  statusOrder: (status) => ({
-    color: status === 'CANCELLED' ? '#D9435E' : '#1ABC9C',
+  statusOrder: (statusColor) => ({
+    color: statusColor,
     fontSize: 10,
     fontFamily: 'Poppins-Regular',
   }),

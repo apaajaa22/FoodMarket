@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Number} from '..';
 
-const DetailOrder = ({label, value, price, type}) => {
+const DetailOrder = ({label, value, price = '#020202', type}) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
   value: (price) => ({
     fontFamily: 'Poppins-Regular',
     fontSize: 14,
-    color: price ? '#1ABC9C' : '#020202',
+    color: price,
   }),
 });
