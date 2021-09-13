@@ -1,4 +1,4 @@
-# React JS - React_Native - Food Market
+# React_Native - Food Market
 
 <img src="https://user-images.githubusercontent.com/59022153/133082061-20c2c2cc-ff3a-4bde-b2fc-4bb952826fcb.png" width="250" height="500" />  <img src="https://user-images.githubusercontent.com/59022153/133082362-607e68c6-8492-45c7-bcf6-1bca868393c6.png" width="250" height="500" />   <img src="https://user-images.githubusercontent.com/59022153/133082372-8df9aa79-e859-4451-a114-02ad59a1fec0.png" width="250" height="500" />   
 
